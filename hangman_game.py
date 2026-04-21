@@ -34,6 +34,20 @@ class HangmanGame:
     def __choose_word(self):
         return random.choice(self.hangman_word_bank)
     
+    # Only used for testing, allows for the test to look at the logic and test for different things.
+    def check_guess(self, guess):
+        if guess in self.__word:
+            self.__correct_letters.add(guess)
+            return True
+        else:
+            self.__wrong_letters.add(guess)
+            self.__wrong_guesses += 1
+            return False
+        
+    # Used for testing, makes sure a word is being chosen.
+    def get_word(self):
+        return self.__word
+        
     # Shows the selected word with underscores for missing letters
     def __display_word(self):
         display = ""
@@ -80,14 +94,13 @@ class HangmanGame:
                     print("You already guessed that letter.")
                     continue
 
-                # Checks if the guess is correct
-                if guess in self.__word:
+                # Use testable function for logic
+                result = self.check_guess(guess)
+
+                if result:
                     print("Correct guess!")
-                    self.__correct_letters.add(guess)
                 else:
                     print("Wrong guess!")
-                    self.__wrong_letters.add(guess)
-                    self.__wrong_guesses += 1
 
                 # Checks win condition
                 if all(letter in self.__correct_letters for letter in self.__word):
