@@ -28,7 +28,7 @@ class HangmanGame:
         self.__correct_letters = set()
         self.__wrong_letters = set()
         self.__wrong_guesses = 0
-        self.__max_attempts = 100  # Temporary for testing win condition, later will be 9
+        self.__max_attempts = 9  # Changed to 9
 
     # Randomly select a word from the word bank
     def __choose_word(self):
@@ -52,10 +52,11 @@ class HangmanGame:
 
         # Until the max attempts are made, the user can continue to guess letters.
         while self.__wrong_guesses < self.__max_attempts:
-            print("\nWord:", self.__display_word())      # Shows the progress of the word
-            print("Correct letters:", sorted(self.__correct_letters))  # Shows the correct letters guessed
-            print("Wrong letters:", sorted(self.__wrong_letters))   # Shows the incorrect letters guessed
-        
+            print("\nWord:", self.__display_word())
+            print("Correct letters:", sorted(self.__correct_letters))
+            print("Wrong letters:", sorted(self.__wrong_letters))
+            print("Attempts left:", self.__max_attempts - self.__wrong_guesses)
+
             guess = input("Guess a letter: ").lower()
 
             # Makes sure that a letter is being inputted.
@@ -77,16 +78,17 @@ class HangmanGame:
                 self.__wrong_letters.add(guess)
                 self.__wrong_guesses += 1
 
-            # Check win condition
+            # Checks win condition
             if all(letter in self.__correct_letters for letter in self.__word):
                 print("\nWord:", self.__word)
                 print("Congratulations! You guessed the word!")
-                break
+                return
 
-        print("Game ended.")
-        
+        # Without any attempts left, the user lost the game
+        print("\nGame Over! You ran out of attempts.")
+        print("The word was:", self.__word)
 
-# Runs the game
-if __name__ == "__main__":
-    game = HangmanGame()
+# Runs the game 
+if __name__ == "__main__": 
+    game = HangmanGame() 
     game.start_game()
