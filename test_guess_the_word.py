@@ -2,8 +2,7 @@
 # CIS256 Spring 2026
 # Exercise Assignment 4
 
-from hangman_game import HangmanGame
-
+from guess_the_word import HangmanGame
 
 # Test 1) Does the program select a word from the word bank?
 def test_word_selected_from_bank():
