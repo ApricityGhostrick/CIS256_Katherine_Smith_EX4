@@ -58,7 +58,7 @@ class HangmanGame:
         print("(Hint: It's boardgame themed!)")
 
         # Starts a game loop
-        while True:  # Game loop (for replay)
+        while True: 
             self.__reset_game()
 
             # Until the max attempts are made, the user can continue to guess letters.
